@@ -1,7 +1,7 @@
 # Tokyo Xtreme Racer Save Editor - TXRSE
 CLI save editor for Tokyo Xtreme Racer 2025.    
 ![](https://i.imgur.com/MhkteCr.png)    
-[Pre-compiled binaries](https://github.com/Sorrow446/okyo-Xtreme-Racer-Save-Editor---TXRS/releases)
+[Pre-compiled binaries](https://github.com/Sorrow446/Tokyo-Xtreme-Racer-Save-Editor---TXRSE/releases)
 ## Usage
 
 ### CLI
