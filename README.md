@@ -21,7 +21,7 @@ Options:
 ```
 
 ### Interactive batch file
-If you can't be bothered with CLI, simply drag and drop your save file onto the included batch file.
+If you can't be bothered with CLI, simply drag and drop your save file onto the included batch file. The TXRSE binary's still required.
 
 ## Thank you
 - Uses [trumank's great uesave-rs library](https://github.com/trumank/uesave-rs) which does the heavy lifting.
