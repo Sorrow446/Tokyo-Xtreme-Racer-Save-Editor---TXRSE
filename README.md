@@ -5,6 +5,8 @@ CLI save editor for Tokyo Xtreme Racer 2025.
 ## Usage
 
 ### CLI
+Save dir: `%localappdata%\TokyoXtremeRacer\Saved\SaveGames`
+
 Set the CP to 500K and the BP to 100:    
 `txrse.exe --cp 500000 --bp 100 -i G:\rust\txr\UserData_00.sav`
 
