@@ -8,7 +8,7 @@ use std::path::PathBuf;
 use std::error::Error;
 
 use clap::Parser;
-use uesave::{PropertyInner, Save, StructValue};
+use uesave::{Property, PropertyInner, PropertyKey, PropertyTagDataPartial, PropertyTagPartial, PropertyType, Save, StructValue};
 use crate::structs::UserArgs;
 
 const BP_MAX: i16 = 999;
@@ -34,22 +34,51 @@ fn parse_args() -> Result<UserArgs, Box<dyn Error>> {
 fn read_and_write_props(save: &mut Save, args: &UserArgs) -> Result<(), Box<dyn Error>> {
     if let PropertyInner::Struct(user_info) = &mut save.root.properties["user_info"].inner {
         if let StructValue::Struct(properties) = user_info {
-
             if let Some(cp) = args.cp {
-                if let PropertyInner::Int64(ref mut cur_cp) = properties["Cp"].inner {
+                if let Some(PropertyInner::Int64(ref mut cur_cp)) = properties
+                    .0
+                    .get_mut(&PropertyKey::from("Cp"))
+                    .map(|prop| &mut prop.inner)
+                {
                     println!("CP:\n{} -> {}", cur_cp, cp);
                     *cur_cp = cp;
                 } else {
-                    return Err("cp value key is missing".into());
+                    properties.0.insert(
+                        PropertyKey::from("Cp"),
+                        Property {
+                            tag: PropertyTagPartial {
+                                data: PropertyTagDataPartial::Other(PropertyType::Int64Property),
+                                id: None,
+                            },
+                            inner: PropertyInner::Int64(cp),
+                        },
+                    );
+
+                    println!("CP:\n0 -> {}", cp);
                 }
             }
 
             if let Some(bp) = args.bp {
-                if let PropertyInner::Int(ref mut cur_bp) = properties["PP"].inner {
+                if let Some(PropertyInner::Int(ref mut cur_bp)) = properties
+                    .0
+                    .get_mut(&PropertyKey::from("PP"))
+                    .map(|prop| &mut prop.inner)
+                {
                     println!("BP:\n{} -> {}", cur_bp, bp);
                     *cur_bp = bp as i32;
                 } else {
-                    return Err("bp value key is missing".into());
+                    properties.0.insert(
+                        PropertyKey::from("PP"),
+                        Property {
+                            tag: PropertyTagPartial {
+                                data: PropertyTagDataPartial::Other(PropertyType::IntProperty),
+                                id: None,
+                            },
+                            inner: PropertyInner::Int(bp as i32),
+                        },
+                    );
+
+                    println!("BP:\n0 -> {}", bp);
                 }
             }
 
